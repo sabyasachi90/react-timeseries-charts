@@ -138,7 +138,7 @@ class cycling extends React.Component {
                 if (i > 0) {
                     const deltaTime = data.time[i] - data.time[i - 1];
                     const time = data.time[i] * 1000;
-
+                    console.log(deltaTime);
                     points["distance"].push([time, data.distance[i]]);
                     points["altitude"].push([time, data.altitude[i] * 3.28084]); // convert m to ft
                     points["cadence"].push([time, data.cadence[i]]);
@@ -166,6 +166,10 @@ class cycling extends React.Component {
                     columns: ["time", channelName],
                     points: points[channelName]
                 });
+
+                console.log(channels[channelName].name);
+                console.log(["time", channelName]);
+                console.log(points[channelName]);
 
                 if (_.contains(displayChannels, channelName)) {
                     const rollups = _.map(rollupLevels, rollupLevel => {
@@ -291,6 +295,8 @@ class cycling extends React.Component {
                 { label: "Max", value: speedFormat(channels[channelName].max) },
                 { label: "Avg", value: speedFormat(channels[channelName].avg) }
             ];
+
+            console.log(charts);
 
             rows.push(
                 <ChartRow
